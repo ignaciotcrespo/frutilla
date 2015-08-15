@@ -66,3 +66,9 @@ Including in gradle the following is enough
     androidTestCompile 'com.android.support.test:runner:0.3'
     
 The code is still in development but functional.
+
+Why Frutilla? In my land when something good was added to another good thing we say "es la frutilla del postre", similar to "the icing in the cake".
+
+JUnit is good, just needs some flavor on it ;)
+
+
