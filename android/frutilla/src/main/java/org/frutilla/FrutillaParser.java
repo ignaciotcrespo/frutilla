@@ -1,11 +1,11 @@
-package org.frutilla.fresa;
+package org.frutilla;
 
 import java.util.LinkedList;
 
 /**
  * Created by crespo on 14/08/15.
  */
-public class FresaParser {
+public class FrutillaParser {
 
     private static Given sGiven;
     private static PseudocodeListener sPseudocodeListener;
@@ -104,8 +104,7 @@ public class FresaParser {
             StringBuilder sentence = new StringBuilder()
                     .append(header())
                     .append(" ")
-                    .append(sentences())
-                    .append("\n") ;
+                    .append(sentences());
             if (mChild != null) {
                 sentence.append(mChild.popSentence());
             }
@@ -118,10 +117,10 @@ public class FresaParser {
             int i = 0;
             for (String sentence : mRulesEnd) {
                 if (i > 0) {
-                    text.append("\n AND ");
+                    text.append(" AND ");
                 }
                 text.append(sentence);
-                text.append(" ");
+                text.append("\n");
                 i++;
             }
             mRules.clear();

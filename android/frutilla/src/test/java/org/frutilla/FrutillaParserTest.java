@@ -1,20 +1,25 @@
-package org.frutilla.fresa;
-
-import org.frutilla.annotations.FrutillaCase;
+package org.frutilla;
 
 import org.frutilla.annotations.Frutilla;
+import org.frutilla.annotations.FrutillaCake;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import junit.framework.TestCase;
+import static org.frutilla.FrutillaParser.given;
+import static org.frutilla.FrutillaParser.has;
+import static org.frutilla.FrutillaParser.reset;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.frutilla.fresa.FresaParser.given;
-import static org.frutilla.fresa.FresaParser.has;
-import static org.frutilla.fresa.FresaParser.reset;
-
-@FrutillaCase(
-        ClassUnderTest = FresaParser.class,
-        Specs = "not yet"
+@FrutillaCake(
+        ClassUnderTest = FrutillaParser.class,
+        Specs = "https://github.com/ignaciotcrespo/frutilla"
 )
-public class FresaParserTest extends TestCase {
+@RunWith(value = FrutillaTestRunner.class)
+public class FrutillaParserTest {
 
     private static final String GIVEN = "given";
     private static final String WHEN = "when";
@@ -23,20 +28,21 @@ public class FresaParserTest extends TestCase {
     private static final String TWO = "two";
     private static final String THREE = "three";
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        FresaParser.reset();
-        FresaParser.setListener(null);
+    @Before
+    public void setUp() throws Exception {
+        reset();
+        FrutillaParser.setListener(null);
     }
 
     @Frutilla(
+            Scenario = "FrutillaParser not used",
             Given = "nothing declared",
             When = "checking if something exists",
             Then = "nothing exists"
     )
+    @Test
     public void testEmptyByDefault() throws Exception {
-        assertTrue(FresaParser.isEmpty());
+        assertTrue(FrutillaParser.isEmpty());
     }
 
     @Frutilla(
@@ -44,6 +50,7 @@ public class FresaParserTest extends TestCase {
             When = "is declared",
             Then = "the sentence exists"
     )
+    @Test
     public void testGiven() throws Exception {
         given(GIVEN).end();
 
@@ -55,6 +62,7 @@ public class FresaParserTest extends TestCase {
             When = "are added",
             Then = "all sentences exist"
     )
+    @Test
     public void testGivenMultiple() throws Exception {
         given(GIVEN).and(ONE).and(TWO).end();
 
@@ -67,6 +75,7 @@ public class FresaParserTest extends TestCase {
             When = "are added",
             Then = "all exist"
     )
+    @Test
     public void testAllTogether() throws Exception {
         given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
 
@@ -83,6 +92,7 @@ public class FresaParserTest extends TestCase {
             When = "clear all sentences",
             Then = "there are no sentences"
     )
+    @Test
     public void testReset() throws Exception {
         given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
 
@@ -104,12 +114,13 @@ public class FresaParserTest extends TestCase {
                     "and is empty after reading sentence"
             }
     )
+    @Test
     public void testPopSentence() throws Exception {
         given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
 
         final String sentence = String.format("GIVEN %s\n AND %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s\n", GIVEN, ONE, WHEN, TWO, THEN, THREE);
-        assertEquals(sentence, FresaParser.popSentence());
-        assertTrue(FresaParser.isEmpty());
+        assertEquals(sentence, FrutillaParser.popSentence());
+        assertTrue(FrutillaParser.isEmpty());
     }
 
     @Frutilla(
@@ -117,6 +128,7 @@ public class FresaParserTest extends TestCase {
             When = "is declared",
             Then = "the sentence exists"
     )
+    @Test
     public void testWhen() throws Exception {
         given(GIVEN).when(WHEN).end();
 
@@ -128,6 +140,7 @@ public class FresaParserTest extends TestCase {
             When = "are added",
             Then = "all sentences exist"
     )
+    @Test
     public void testWhenMultiple() throws Exception {
         given(GIVEN).when(WHEN).and(ONE).and(TWO).end();
 
@@ -141,6 +154,7 @@ public class FresaParserTest extends TestCase {
             When = "is declared",
             Then = "the sentence exists"
     )
+    @Test
     public void testThen() throws Exception {
         given(GIVEN).when(WHEN).then(THEN).end();
 
@@ -152,6 +166,7 @@ public class FresaParserTest extends TestCase {
             When = "are added",
             Then = "all sentences exist"
     )
+    @Test
     public void testThenMultiple() throws Exception {
         given(GIVEN).when(WHEN).then(THEN).and(ONE).and(TWO).end();
 
@@ -159,9 +174,8 @@ public class FresaParserTest extends TestCase {
         assertTrue(has(TWO));
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        FresaParser.reset();
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
+        reset();
     }
 }

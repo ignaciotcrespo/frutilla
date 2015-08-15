@@ -4,7 +4,7 @@ import android.app.Instrumentation;
 import android.os.Bundle;
 import android.test.InstrumentationTestRunner;
 
-import org.frutilla.fresa.FresaParser;
+import org.frutilla.FrutillaParser;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.Test;
@@ -22,7 +22,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by crespo on 13/08/15.
  */
-public class FresaTestListener implements TestListener, FresaParser.PseudocodeListener {
+public class FresaTestListener implements TestListener, FrutillaParser.PseudocodeListener {
 
     private final Instrumentation mInstrumentation;
     Hashtable<String, String> mCacheDescriptions = new Hashtable<>();
@@ -31,7 +31,7 @@ public class FresaTestListener implements TestListener, FresaParser.PseudocodeLi
 
     public FresaTestListener(Instrumentation instrumentation) {
         mInstrumentation = instrumentation;
-        FresaParser.setListener(this);
+        FrutillaParser.setListener(this);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class FresaTestListener implements TestListener, FresaParser.PseudocodeLi
     public void endTest(Test test) {
         //no end called in pseudocode?
         if (test instanceof TestCase) {
-            if (isPseudocodeAnnotation() && FresaParser.isEndPending()) {
+            if (isPseudocodeAnnotation() && FrutillaParser.isEndPending()) {
                 TestCase tc = (TestCase) test;
                 CachedStatus status;
                 while ((status = mQueueStarts.poll()) != null) {
@@ -149,8 +149,8 @@ public class FresaTestListener implements TestListener, FresaParser.PseudocodeLi
         if (currentTest != null && currentTest instanceof TestCase) {
             TestCase tc = (TestCase) currentTest;
             System.out.println("xxx-pseudo send status delayed: " + tc.getName());
-            if (!FresaParser.isEmpty()) {
-                mCacheDescriptions.put(tc.getName(), FresaParser.popSentence());
+            if (!FrutillaParser.isEmpty()) {
+                mCacheDescriptions.put(tc.getName(), FrutillaParser.popSentence());
             }
         }
 
@@ -171,9 +171,9 @@ public class FresaTestListener implements TestListener, FresaParser.PseudocodeLi
             System.out.println("xxx-pseudo new name " + value);
             results.putString(InstrumentationTestRunner.REPORT_KEY_NAME_TEST, value);
             if (resultCode != InstrumentationTestRunner.REPORT_VALUE_RESULT_START) {
-                if (!FresaParser.isEmpty()) {
+                if (!FrutillaParser.isEmpty()) {
                     System.out.println("xxx-pseudo --------- ");
-                    System.out.println("xxx-pseudo " + name + ": " + FresaParser.popSentence());
+                    System.out.println("xxx-pseudo " + name + ": " + FrutillaParser.popSentence());
                     System.out.println("xxx-pseudo ---------");
                 } else {
                     System.out.println("xxx-pseudo --------- " + resultCode);

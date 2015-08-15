@@ -4,13 +4,13 @@ import android.app.Instrumentation;
 import android.os.Bundle;
 import android.test.InstrumentationTestRunner;
 
-import org.frutilla.fresa.FresaParser;
-
 import junit.framework.AssertionFailedError;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestListener;
 
+import org.frutilla.FrutillaAnnotationHelper;
+import org.frutilla.FrutillaParser;
 import org.frutilla.annotations.Frutilla;
 import org.frutilla.utils.ExceptionUtils;
 
@@ -69,26 +69,8 @@ public class FrutillaTestListener implements TestListener {
 
     private void processAnnotationTestx(TestCase tc, Method mtd) {
         Frutilla ann = mtd.getAnnotation(Frutilla.class);
-        if (ann != null) {
-            StringBuffer text = new StringBuffer();
-            addTexts("GIVEN", text, ann.Given());
-            addTexts("WHEN", text, ann.When());
-            addTexts("THEN", text, ann.Then());
-            mCacheDescriptions.put(tc.getName(), text.toString());
-        }
-    }
-
-    private void addTexts(String header, StringBuffer text, String[] sentences) {
-        text.append(header).append(" ");
-        int i = 0;
-        for (String sentence : sentences) {
-            if (i > 0) {
-                text.append(" AND ");
-            }
-            text.append(sentence);
-            text.append("\n");
-            i++;
-        }
+        String value = FrutillaAnnotationHelper.getText(ann);
+        mCacheDescriptions.put(tc.getName(), value);
     }
 
     public void onSendStatusChangedName(int resultCode, Bundle results) {
@@ -100,9 +82,9 @@ public class FrutillaTestListener implements TestListener {
             //results.putString(InstrumentationTestRunner.REPORT_KEY_NAME_TEST, value);
         } else {
             if (resultCode != InstrumentationTestRunner.REPORT_VALUE_RESULT_START) {
-                if (!FresaParser.isEmpty()) {
+                if (!FrutillaParser.isEmpty()) {
                     System.out.println("xxx --------- ");
-                    System.out.println("xxx " + name + ": " + FresaParser.popSentence());
+                    System.out.println("xxx " + name + ": " + FrutillaParser.popSentence());
                     System.out.println("xxx ---------");
                 } else {
                     System.out.println("xxx --------- " + resultCode);

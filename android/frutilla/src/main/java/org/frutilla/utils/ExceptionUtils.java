@@ -12,9 +12,9 @@ public class ExceptionUtils {
             Field field = Throwable.class.getDeclaredField("detailMessage"); //Method("initCause", new Class[]{Throwable.class});
             field.setAccessible(true);
             if (onObject.getMessage() != null) {
-                field.set(onObject, "\n[\n" + msg + "]\n[\nMessage: " + onObject.getMessage() + "\n]");
+                field.set(onObject, "\n[\n" + msg + "\n]\n[\nMessage: " + onObject.getMessage() + "\n]");
             } else {
-                field.set(onObject, "\n[\n" + msg + "]\n");
+                field.set(onObject, "\n[\n" + msg + "\n]\n");
             }
         } catch (RuntimeException e) {
             throw e;

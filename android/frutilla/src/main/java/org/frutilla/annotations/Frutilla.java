@@ -7,12 +7,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.METHOD)
 @Documented
-public @interface FrutillaCase {
+public @interface Frutilla {
 
-    Class<?> ClassUnderTest();
+    String Scenario() default "";
 
-    String Specs();
+    String[] Given();
+
+    String[] When();
+
+    String[] Then();
 
 }
