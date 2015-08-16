@@ -3,10 +3,13 @@ Frutilla lets software development teams describe the tests in plain text, and l
 
 I like the **[Cucumber](https://cucumber.io/)** way to describe tests using **GIVEN + WHEN + THEN** sentences, and I think JUnit needs something to help UT to be more descriptive. Cucumber has a java API but I think it is very complex to use, linking sentences to java methods. Creating a UT should be a simple task.
 
-I will not enter in the discussion of UT must be self descriptive, etc. I really appreciate a javadoc in top of a UT describing what is being tested, you know exactly the use case in seconds.
-But the disadvantage of a javadoc is it cant be included in the .class file, so the descriptions are missing in test reports.
+I will not enter in the discussion of UT must be self descriptive, etc. I really appreciate a javadoc in top of a UT describing what is being tested, you know exactly the use case in seconds. It doesnt matter if it is a small unit test or an integration test, a proper documentation is always welcome.
 
-I created 2 ways or flavors of adding descriptions: with annotations or with JUnit rules.
+The disadvantage of a javadoc is it cant be included in the .class file, so the descriptions are missing in the test reports, only the name of the test and the class are included.
+
+I created 2 ways or flavors of adding descriptions: with annotations and with JUnit rules.
+
+# Flavor 1: Annotations
 
 Using annotations needs a specific runner and looks like the following:
 
@@ -38,6 +41,8 @@ One advantage of using annotations is they can be collapsed by default, and the 
     }
 ```
 
+# Flavor 2: JUnit rules
+
 In case annotations is not your cup of tea I included a way to do it using the powerful JUnit rules. In this case there is no need to run with FrutillaTestRunner, but the rule needs to be declared.
 
 ```java
@@ -58,8 +63,10 @@ In case annotations is not your cup of tea I included a way to do it using the p
 
 I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it. Another disadvantage is you can not collapse the descriptions block.
 
+# The stacktrace in the reports
+
 What I added to test reports is the description in top of the stacktrace errors. I dont care the tests that passed, I care about those that failed, and I want to know fast what is the problem. 
-The stacktrace looks like this:
+Using Frutilla the stacktrace looks like this:
 
     java.lang.RuntimeException:
     [
@@ -75,8 +82,10 @@ The stacktrace looks like this:
     at java.lang.reflect.Method.invoke(Method.java:511)
     ...
   
-It is helpful to see those descriptions in CI servers like jenkins. I really hate to see a failed UT in jenkins and start searching for it in the code to understand what is doing due to the name is something like "testParsingDataValidWhenNoUser". WTF, that method name can be hundred of things.
+It is helpful to see those descriptions in CI servers like jenkins. I really hate to see a failed UT in jenkins and start searching for it in the code to understand what is doing due to the name is something like "testParsingDataValidWhenNoUser". WTF, that method name can be a hundred of things. What is the data? Why is not valid? And more.
 With the proper description I know exactly what is failing, and if the descriptions are linked to the specifications then we are 1 click of knowing the complete scenario to understan the problem.
+
+# Android
 
 Frutilla can be used also in **Android** using the excellent JUnit4 instrumentation runner **[AndroidJUnitRunner](http://developer.android.com/reference/android/support/test/runner/AndroidJUnitRunner.html)**
 
@@ -98,7 +107,9 @@ Pending:
  
 ***
 
-Why Frutilla? In my land when something good was added to another good thing we say "es la frutilla del postre", similar to "the icing in the cake".
+# Why Frutilla? 
+
+"Frutilla" is strawberry in spanish, in my land when something good was added to another good thing we say "es la frutilla del postre", similar to "the icing on the cake".
 
 JUnit is good, just needs some flavor on it ;)
 
