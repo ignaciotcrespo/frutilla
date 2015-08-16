@@ -83,7 +83,7 @@ Using Frutilla the stacktrace looks like this:
     ...
   
 It is helpful to see those descriptions in CI servers like jenkins. I really hate to see a failed UT in jenkins and start searching for it in the code to understand what is doing due to the name is something like "testParsingDataValidWhenNoUser". WTF, that method name can be a hundred of things. What is the data? Why is not valid? And more.
-With the proper description I know exactly what is failing, and if the descriptions are linked to the specifications then we are 1 click of knowing the complete scenario to understan the problem.
+With the proper description I know exactly what is failing, and if the descriptions are linked to the specifications then we are 1 click of knowing the complete scenario to understand the problem.
 
 # Android
 
@@ -111,7 +111,7 @@ Pending:
 
 # Why Frutilla? 
 
-"Frutilla" is strawberry in spanish, in my land when something good was added to another good thing we say "es la frutilla del postre", similar to "the icing on the cake".
+"Frutilla" means strawberry in spanish, in my land when something good was added to another good thing we say "es la frutilla del postre", similar to "the icing on the cake".
 
 JUnit is good, just needs some flavor on it ;)
 
