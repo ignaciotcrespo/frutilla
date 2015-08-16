@@ -10,6 +10,7 @@ I created 2 ways or flavors of adding descriptions: with annotations or with JUn
 
 Using annotations needs a specific runner and looks like the following:
 
+```java
     @RunWith(value = org.frutilla.FrutillaTestRunner.class)
     public class FrutillaExamplesWithAnnotationTest {
     
@@ -24,11 +25,13 @@ Using annotations needs a specific runner and looks like the following:
         }
         
     }
+```
 
 It supports also adding **AND** sentences on every block GIVEN, WHEN or THEN
 
 In case annotations is not your cup of tea I included a way to do it using the powerful JUnit rules. In this case there is no need to run with FrutillaTestRunner, but the rule needs to be declared.
 
+```java
     public class FrutillaExamplesWithRuleTest {
 
       @Rule
@@ -42,6 +45,7 @@ In case annotations is not your cup of tea I included a way to do it using the p
 
         throw new RuntimeException("forced exception");
       }
+```
 
 > I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it.
 
