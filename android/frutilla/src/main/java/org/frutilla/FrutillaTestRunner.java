@@ -1,21 +1,18 @@
 package org.frutilla;
 
 import org.frutilla.annotations.Frutilla;
-import org.frutilla.utils.ExceptionUtils;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 /**
- * Created by crespo on 15/08/15.
+ * Process Frutilla annotations in top of tests.
  */
 public class FrutillaTestRunner extends BlockJUnit4ClassRunner {
+
     /**
-     * Creates a BlockJUnit4ClassRunner to run {@code klass}
-     *
-     * @param klass
-     * @throws InitializationError if the test class is malformed.
+     * Constructor inherited from {@link BlockJUnit4ClassRunner}
      */
     public FrutillaTestRunner(Class<?> klass) throws InitializationError {
         super(klass);

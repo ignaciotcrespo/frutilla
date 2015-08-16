@@ -3,12 +3,9 @@ package org.frutilla;
 
 import org.frutilla.annotations.Frutilla;
 
-/**
- * Created by crespo on 15/08/15.
- */
-public class FrutillaAnnotationHelper {
+class FrutillaAnnotationHelper {
 
-    public static String getText(Frutilla ann) {
+    static String getText(Frutilla ann) {
         String value = "";
         if (ann != null) {
             StringBuffer text = new StringBuffer();
@@ -20,7 +17,7 @@ public class FrutillaAnnotationHelper {
         return value;
     }
 
-    private static void addTexts(String header, StringBuffer text, String[] sentences) {
+    static void addTexts(String header, StringBuffer text, String[] sentences) {
         text.append(header).append(" ");
         int i = 0;
         for (String sentence : sentences) {

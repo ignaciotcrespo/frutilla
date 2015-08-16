@@ -3,9 +3,9 @@ package org.frutilla;
 import java.util.LinkedList;
 
 /**
- * Created by crespo on 14/08/15.
+ * Parses the Frutilla JUnit rules.
  */
-public class FrutillaParser {
+class FrutillaParser {
 
     private static Given sGiven;
     private static PseudocodeListener sPseudocodeListener;
@@ -17,10 +17,7 @@ public class FrutillaParser {
     }
 
     static boolean has(String sentence) {
-        if (sGiven != null) {
-            return sGiven.has(sentence);
-        }
-        return false;
+        return sGiven != null && sGiven.has(sentence);
     }
 
     public static void reset() {
@@ -31,8 +28,7 @@ public class FrutillaParser {
     }
 
     public static boolean isEmpty() {
-        final boolean empty = sGiven == null || sGiven.isEmpty();
-        return empty;
+        return sGiven == null || sGiven.isEmpty();
     }
 
     public static String popSentence() {
@@ -54,8 +50,8 @@ public class FrutillaParser {
 
     private static abstract class AbstractRules {
 
-        private final LinkedList<String> mRules = new LinkedList();
-        private final LinkedList<String> mRulesEnd = new LinkedList();
+        private final LinkedList<String> mRules = new LinkedList<>();
+        private final LinkedList<String> mRulesEnd = new LinkedList<>();
         private AbstractRules mChild;
         private AbstractRules mParent;
 
@@ -63,7 +59,7 @@ public class FrutillaParser {
             addRule(rule);
         }
 
-        protected void addRule(String rule) {
+        void addRule(String rule) {
             mRules.add(rule);
         }
 
@@ -81,16 +77,21 @@ public class FrutillaParser {
 
         }
 
-        public AbstractRules and(String rule) {
-            addRule(rule);
+        /**
+         * Adds another sentence to the current group.
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public AbstractRules and(String sentence) {
+            addRule(sentence);
             return this;
         }
 
-        protected boolean isEmpty() {
+        boolean isEmpty() {
             return mRulesEnd.isEmpty() && (mChild == null || mChild.isEmpty());
         }
 
-        protected <T extends AbstractRules> T setChild(T child) {
+        <T extends AbstractRules> T setChild(T child) {
             mChild = child;
             mChild.setParent(this);
             return child;
@@ -156,21 +157,29 @@ public class FrutillaParser {
 
     //----------------------------------------------------------------------------------------------
 
+    /**
+     * Group of sentences describing the entry point of the use case, using plain text.
+     */
     public static class Given extends AbstractRules {
 
         private Given(String rule) {
             super(rule);
         }
 
-        public When when(String text) {
-            When when = new When(text);
+        /**
+         * Starts describing the action executed in the use case.
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public When when(String sentence) {
+            When when = new When(sentence);
             setChild(when);
             return when;
         }
 
         @Override
-        public Given and(String rule) {
-            return (Given) super.and(rule);
+        public Given and(String sentence) {
+            return (Given) super.and(sentence);
         }
 
         @Override
@@ -182,19 +191,27 @@ public class FrutillaParser {
 
     //----------------------------------------------------------------------------------------------
 
+    /**
+     * A group of sentences describing the action to execute in the use case, using plain text.
+     */
     public static class When extends AbstractRules {
 
         private When(String rule) {
             super(rule);
         }
 
-        public Then then(String s) {
-            return setChild(new Then(s));
+        /**
+         * Starts describing in plain text the expected behavior after executing the use case.
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public Then then(String sentence) {
+            return setChild(new Then(sentence));
         }
 
         @Override
-        public When and(String rule) {
-            return (When) super.and(rule);
+        public When and(String sentence) {
+            return (When) super.and(sentence);
         }
 
         @Override
@@ -206,6 +223,9 @@ public class FrutillaParser {
 
     //----------------------------------------------------------------------------------------------
 
+    /**
+     * Describes in plain text the expected behavior after executing the use case.
+     */
     public static class Then extends AbstractRules {
 
         private Then(String rule) {
@@ -213,8 +233,8 @@ public class FrutillaParser {
         }
 
         @Override
-        public Then and(String rule) {
-            return (Then) super.and(rule);
+        public Then and(String sentence) {
+            return (Then) super.and(sentence);
         }
 
         @Override
