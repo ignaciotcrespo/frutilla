@@ -60,12 +60,19 @@ The stacktrace looks like this:
 It is helpful to see those descriptions in CI servers like jenkins. I really hate to see a failed UT in jenkins and start searching for it in the code to understand what is doing due to the name is something like "testParsingDataValidWhenNoUser". WTF, that method name can be hundred of things.
 With the proper description I know exactly what is failing, and if the descriptions are linked to the specifications then we are 1 click of knowing the complete scenario to understan the problem.
 
-Frutilla can be used also in **Android** using the JUnit4 instrumentation runner **android.support.test.runner.AndroidJUnitRunner**
+Frutilla can be used also in **Android** using the excellent JUnit4 instrumentation runner **[AndroidJUnitRunner](http://developer.android.com/reference/android/support/test/runner/AndroidJUnitRunner.html)**
+
 Add it in gradle using:
 
     androidTestCompile 'com.android.support.test:runner:0.3'
     
-Frutilla is still in development, but functional. I appreciate any kind of feedback to itcrespo@gmail.com
+and add the instrumentation in your manifest
+
+        <instrumentation
+        android:name="android.support.test.runner.AndroidJUnitRunner"
+        android:targetPackage="org.frutilla"/>
+    
+Frutilla is still in development, but functional. I appreciate your feedback to itcrespo@gmail.com
 
 Pending:
 - exporting xml/html reports with the descriptions
