@@ -8,21 +8,26 @@ But the disadvantage of a javadoc is it cant be included in the .class file, so 
 
 I created 2 ways or flavors of adding descriptions: with annotations or with JUnit rules.
 
-Using annotations a test looks like the following:
+Using annotations needs a specific runner and looks like the following:
 
-    @Frutilla(
+    @RunWith(value = org.frutilla.FrutillaTestRunner.class)
+    public class FrutillaExamplesWithAnnotationTest {
+    
+        @Frutilla(
             Given = "a test with Frutilla annotations",
             When = "it fails due to an error",
             Then = "it shows the test description in the stacktrace"
-    )
-    @Test
-    public void testError() {
-        throw new RuntimeException("forced error");
+        )
+        @Test
+        public void testError() {
+            throw new RuntimeException("forced error");
+        }
+        
     }
 
 It supports also adding **AND** sentences on every block GIVEN, WHEN or THEN
 
-In case annotations is not your cup of tea I included a way to do it using the powerful JUnit rules
+In case annotations is not your cup of tea I included a way to do it using the powerful JUnit rules. In this case there is no need to run with FrutillaTestRunner, but the rule needs to be declared.
 
     public class FrutillaExamplesWithRuleTest {
 
@@ -38,7 +43,7 @@ In case annotations is not your cup of tea I included a way to do it using the p
         throw new RuntimeException("forced exception");
       }
 
-I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it.
+> I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it.
 
 What I added to test reports is the description in top of the stacktrace errors. I dont care the tests that passed, I care about those that failed, and I want to know fast what is the problem. 
 The stacktrace looks like this:
