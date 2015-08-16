@@ -12,7 +12,7 @@ Using annotations a test looks like the following:
 
     @Frutilla(
             Given = "a test with Frutilla annotations",
-            When = "it fails due to error",
+            When = "it fails due to an error",
             Then = {
                     "it shows the test description in the stacktrace",
                     "and in the logs"
@@ -32,9 +32,9 @@ In case annotations is not your cup of tea I included a way to do it using the p
       
       @Test
       public void testError() throws Exception {
-        mScenario.given("there is a test").and("uses frutilla rule")
-                .when("result is error")
-                .then("must be error and displayed").end();
+        mScenario.given("a test with Frutilla rule")
+                .when("it fails due to and error")
+                .then("it shows the test description in the stacktrace").and("in the logs").end();
 
         throw new RuntimeException("forced exception");
       }
@@ -47,9 +47,9 @@ The stacktrace looks like this:
     java.lang.RuntimeException:
     [
     GIVEN a test with Frutilla annotations
-    WHEN it fails due to error
+    WHEN it fails due to an error
     THEN it shows the test description in the stacktrace
-    and in the logs
+    AND in the logs
     ]
     [
     Message: forced error
