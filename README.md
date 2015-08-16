@@ -27,7 +27,16 @@ Using annotations needs a specific runner and looks like the following:
     }
 ```
 
-It supports also adding **AND** sentences on every block GIVEN, WHEN or THEN
+It supports also adding **AND** sentences on every block GIVEN, WHEN or THEN.
+
+One advantage of using annotations is they can be collapsed by default, and the test in your IDE will be
+
+```java
+    @{...}
+    public void testError() {
+        throw new RuntimeException("forced error");
+    }
+```
 
 In case annotations is not your cup of tea I included a way to do it using the powerful JUnit rules. In this case there is no need to run with FrutillaTestRunner, but the rule needs to be declared.
 
@@ -47,7 +56,7 @@ In case annotations is not your cup of tea I included a way to do it using the p
       }
 ```
 
-> I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it.
+I see pretty invasive to include the description inside the test, but the alternative is there for you if you like it. Another disadvantage is you can not collapse the descriptions block.
 
 What I added to test reports is the description in top of the stacktrace errors. I dont care the tests that passed, I care about those that failed, and I want to know fast what is the problem. 
 The stacktrace looks like this:
