@@ -26,7 +26,6 @@ public class FrutillaParserTest {
     @Before
     public void setUp() throws Exception {
         reset();
-        FrutillaParser.setListener(null);
     }
 
     @Frutilla(
@@ -47,7 +46,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testGiven() throws Exception {
-        given(GIVEN).end();
+        given(GIVEN);
 
         assertTrue(has(GIVEN));
     }
@@ -59,7 +58,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testGivenMultiple() throws Exception {
-        given(GIVEN).and(ONE).and(TWO).end();
+        given(GIVEN).and(ONE).and(TWO);
 
         assertTrue(has(ONE));
         assertTrue(has(TWO));
@@ -72,7 +71,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testAllTogether() throws Exception {
-        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
+        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE);
 
         assertTrue(has(GIVEN));
         assertTrue(has(WHEN));
@@ -89,7 +88,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testReset() throws Exception {
-        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
+        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE);
 
         reset();
 
@@ -111,7 +110,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testPopSentence() throws Exception {
-        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE).end();
+        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE);
 
         final String sentence = String.format("GIVEN %s\n AND %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s\n", GIVEN, ONE, WHEN, TWO, THEN, THREE);
         assertEquals(sentence, FrutillaParser.popSentence());
@@ -125,7 +124,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testWhen() throws Exception {
-        given(GIVEN).when(WHEN).end();
+        given(GIVEN).when(WHEN);
 
         assertTrue(has(WHEN));
     }
@@ -137,7 +136,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testWhenMultiple() throws Exception {
-        given(GIVEN).when(WHEN).and(ONE).and(TWO).end();
+        given(GIVEN).when(WHEN).and(ONE).and(TWO);
 
         assertTrue(has(ONE));
         assertTrue(has(TWO));
@@ -151,7 +150,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testThen() throws Exception {
-        given(GIVEN).when(WHEN).then(THEN).end();
+        given(GIVEN).when(WHEN).then(THEN);
 
         assertTrue(has(THEN));
     }
@@ -163,7 +162,7 @@ public class FrutillaParserTest {
     )
     @Test
     public void testThenMultiple() throws Exception {
-        given(GIVEN).when(WHEN).then(THEN).and(ONE).and(TWO).end();
+        given(GIVEN).when(WHEN).then(THEN).and(ONE).and(TWO);
 
         assertTrue(has(ONE));
         assertTrue(has(TWO));

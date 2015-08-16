@@ -8,7 +8,6 @@ import java.util.LinkedList;
 class FrutillaParser {
 
     private static Given sGiven;
-    private static PseudocodeListener sPseudocodeListener;
 
     public static Given given(String text) {
         reset();
@@ -38,20 +37,11 @@ class FrutillaParser {
         return "";
     }
 
-    public static void setListener(PseudocodeListener testXTestRunner) {
-        sPseudocodeListener = testXTestRunner;
-    }
-
-    public static boolean isEndPending() {
-        return sGiven != null && sGiven.isEndPending();
-    }
-
     //----------------------------------------------------------------------------------------------
 
     private static abstract class AbstractRules {
 
         private final LinkedList<String> mRules = new LinkedList<>();
-        private final LinkedList<String> mRulesEnd = new LinkedList<>();
         private AbstractRules mChild;
         private AbstractRules mParent;
 
@@ -64,12 +54,11 @@ class FrutillaParser {
         }
 
         public boolean has(String sentence) {
-            return mRulesEnd.contains(sentence) || (mChild != null && mChild.has(sentence));
+            return mRules.contains(sentence) || (mChild != null && mChild.has(sentence));
         }
 
         public void reset() {
             mRules.clear();
-            mRulesEnd.clear();
             if (mChild != null) {
                 mChild.reset();
                 mChild = null;
@@ -88,7 +77,7 @@ class FrutillaParser {
         }
 
         boolean isEmpty() {
-            return mRulesEnd.isEmpty() && (mChild == null || mChild.isEmpty());
+            return mRules.isEmpty() && (mChild == null || mChild.isEmpty());
         }
 
         <T extends AbstractRules> T setChild(T child) {
@@ -116,7 +105,7 @@ class FrutillaParser {
         private String sentences() {
             StringBuilder text = new StringBuilder();
             int i = 0;
-            for (String sentence : mRulesEnd) {
+            for (String sentence : mRules) {
                 if (i > 0) {
                     text.append(" AND ");
                 }
@@ -130,29 +119,6 @@ class FrutillaParser {
 
         protected abstract String header();
 
-        public void end() {
-            mRulesEnd.addAll(mRules);
-            mRules.clear();
-            if (mParent != null) {
-                mParent.end();
-            } else {
-                if (sPseudocodeListener != null) {
-                    sPseudocodeListener.sendStatusStartDelayed();
-                }
-            }
-        }
-
-        public boolean isEndPending() {
-            boolean isPending = mRulesEnd.isEmpty() && !mRules.isEmpty();
-            if (!isPending) {
-                isPending = mChild != null && mChild.isEndPending();
-            }
-            return isPending;
-        }
-    }
-
-    public interface PseudocodeListener {
-        void sendStatusStartDelayed();
     }
 
     //----------------------------------------------------------------------------------------------

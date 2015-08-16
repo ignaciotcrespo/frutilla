@@ -10,7 +10,9 @@ class FrutillaAnnotationHelper {
         if (ann != null) {
             StringBuffer text = new StringBuffer();
             addTexts("GIVEN", text, ann.Given());
+            text.append("\n");
             addTexts("WHEN", text, ann.When());
+            text.append("\n");
             addTexts("THEN", text, ann.Then());
             value = text.toString();
         }
@@ -22,10 +24,10 @@ class FrutillaAnnotationHelper {
         int i = 0;
         for (String sentence : sentences) {
             if (i > 0) {
+                text.append("\n");
                 text.append(" AND ");
             }
             text.append(sentence);
-            text.append("\n");
             i++;
         }
     }

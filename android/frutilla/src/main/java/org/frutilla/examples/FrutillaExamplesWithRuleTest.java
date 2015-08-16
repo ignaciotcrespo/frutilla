@@ -15,25 +15,10 @@ public class FrutillaExamplesWithRuleTest {
     public FrutillaRule mScenario = new FrutillaRule();
 
     @Test
-    public void testPassedNormal() throws Exception {
-        assertTrue(true);
-    }
-
-    @Test
-    public void testFailedNormal() throws Exception {
-        assertTrue(false);
-    }
-
-    @Test
-    public void testErrorNormal() throws Exception {
-        throw new RuntimeException();
-    }
-
-    @Test
     public void testPassed() throws Exception {
         mScenario.given("there is a test").and("uses frutilla rule")
                 .when("result is passed")
-                .then("must be passed and displayed").end();
+                .then("must be passed and displayed");
 
         assertTrue(true);
     }
@@ -68,7 +53,7 @@ public class FrutillaExamplesWithRuleTest {
     public void testFailed() throws Exception {
         mScenario.given("there is a test").and("uses frutilla rule")
                 .when("result is failed")
-                .then("must be failed and displayed").end();
+                .then("must be failed and displayed");
 
         assertTrue(false);
     }
@@ -77,7 +62,7 @@ public class FrutillaExamplesWithRuleTest {
     public void testError() throws Exception {
         mScenario.given("there is a test").and("uses frutilla rule")
                 .when("result is error")
-                .then("must be error and displayed").end();
+                .then("must be error and displayed");
 
         throw new RuntimeException("forced exception");
     }
