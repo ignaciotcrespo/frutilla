@@ -99,6 +99,8 @@ and add the instrumentation in your manifest
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:targetPackage="org.frutilla"/>
     
+***
+
 Frutilla is still in development, but functional. I appreciate your feedback to itcrespo@gmail.com
 
 Pending:
