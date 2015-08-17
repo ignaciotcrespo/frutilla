@@ -5,7 +5,7 @@ I like the **[Cucumber](https://cucumber.io/)** way to describe tests using **GI
 
 Tests must be readable and less lines of code is better. I really appreciate a self descriptive test, you know exactly the use case in seconds. It doesnt matter if it is a small unit test or an integration test, a proper description is always welcome. The problem I have found is **the readable code can not be read in the test reports**, and sometimes the reports are opened by people without access to the code, or you as developer received a report but temporary dont have access to the code.
 
-Sometimes for exceptional cases I really appreciate a javadoc in top of a UT describing what is being tested. The same disadvantage than before, a javadoc cant be included in the .class file.
+Also sometimes I really appreciate a javadoc in top of a UT describing what is being tested, some tests are hard to write in a readable way, could be due to the poor architecture of the current code. The same disadvantage than before, a javadoc cant be included in the .class file.
 
 I created 2 ways or flavors of adding descriptions that will be included in the compiled classes: with annotations and with JUnit rules.
 
