@@ -3,11 +3,11 @@ Frutilla lets java software development teams describe the tests in plain text, 
 
 I like the **[Cucumber](https://cucumber.io/)** way to describe tests using **GIVEN + WHEN + THEN** sentences, and I think JUnit needs something to help UT to be more descriptive. Cucumber has a java API but I think it is very complex to use, linking sentences to java methods. Creating a UT should be a simple task.
 
-I will not enter in the discussion of UT must be self descriptive, etc. I agree tests must be readable but I really appreciate a javadoc in top of a UT describing what is being tested, you know exactly the use case in seconds. It doesnt matter if it is a small unit test or an integration test, a proper documentation is always welcome.
+Tests must be readable and less lines of code is better. I really appreciate a self descriptive test, you know exactly the use case in seconds. It doesnt matter if it is a small unit test or an integration test, a proper description is always welcome. The problem I have found is **the readable code can not be read in the test reports**, and sometimes the reports are opened by people without access to the code, or you as developer received a report but temporary dont have access to the code.
 
-The disadvantage of a javadoc is it cant be included in the .class file, so the descriptions are missing in the test reports, only the name of the test and the class are included.
+Sometimes for exceptional cases I really appreciate a javadoc in top of a UT describing what is being tested. The same disadvantage than before, a javadoc cant be included in the .class file.
 
-I created 2 ways or flavors of adding descriptions: with annotations and with JUnit rules.
+I created 2 ways or flavors of adding descriptions that will be included in the compiled classes: with annotations and with JUnit rules.
 
 # Flavor 1: Annotations
 
