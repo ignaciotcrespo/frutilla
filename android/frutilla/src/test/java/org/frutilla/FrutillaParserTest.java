@@ -110,9 +110,9 @@ public class FrutillaParserTest {
     )
     @Test
     public void testPopSentence() throws Exception {
-        given(GIVEN).and(ONE).when(WHEN).and(TWO).then(THEN).and(THREE);
+        given(GIVEN).and(ONE).but("pero").when(WHEN).and(TWO).then(THEN).and(THREE);
 
-        final String sentence = String.format("GIVEN %s\n AND %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s\n", GIVEN, ONE, WHEN, TWO, THEN, THREE);
+        final String sentence = String.format("GIVEN %s\n AND %s\n BUT %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s\n", GIVEN, ONE, "pero", WHEN, TWO, THEN, THREE);
         assertEquals(sentence, FrutillaParser.popSentence());
         assertTrue(FrutillaParser.isEmpty());
     }

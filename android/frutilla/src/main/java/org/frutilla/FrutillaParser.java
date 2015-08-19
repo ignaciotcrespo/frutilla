@@ -9,7 +9,7 @@ class FrutillaParser {
 
     private static Given sGiven;
 
-    public static Given given(String text) {
+    static Given given(String text) {
         reset();
         sGiven = new Given(text);
         return sGiven;
@@ -19,18 +19,18 @@ class FrutillaParser {
         return sGiven != null && sGiven.has(sentence);
     }
 
-    public static void reset() {
+    static void reset() {
         if (sGiven != null) {
             sGiven.reset();
             sGiven = null;
         }
     }
 
-    public static boolean isEmpty() {
+    static boolean isEmpty() {
         return sGiven == null || sGiven.isEmpty();
     }
 
-    public static String popSentence() {
+    static String popSentence() {
         if (sGiven != null) {
             return sGiven.popSentence();
         }
@@ -53,11 +53,11 @@ class FrutillaParser {
             mRules.add(rule);
         }
 
-        public boolean has(String sentence) {
+        boolean has(String sentence) {
             return mRules.contains(sentence) || (mChild != null && mChild.has(sentence));
         }
 
-        public void reset() {
+        void reset() {
             mRules.clear();
             if (mChild != null) {
                 mChild.reset();
@@ -67,13 +67,15 @@ class FrutillaParser {
         }
 
         /**
-         * Adds another sentence to the current group.
+         * Adds another sentence to the current group, starting with AND.
+         *
          * @param sentence the sentence in plain text
          * @return the current group of sentences
          */
-        public AbstractRules and(String sentence) {
-            addRule(sentence);
-            return this;
+        public And and(String sentence) {
+            final And and = new And(sentence);
+            setChild(and);
+            return and;
         }
 
         boolean isEmpty() {
@@ -90,7 +92,7 @@ class FrutillaParser {
             mParent = parent;
         }
 
-        public String popSentence() {
+        String popSentence() {
             StringBuilder sentence = new StringBuilder()
                     .append(header())
                     .append(" ")
@@ -107,7 +109,7 @@ class FrutillaParser {
             int i = 0;
             for (String sentence : mRules) {
                 if (i > 0) {
-                    text.append(" AND ");
+                    text.append(" ");
                 }
                 text.append(sentence);
                 text.append("\n");
@@ -119,9 +121,70 @@ class FrutillaParser {
 
         protected abstract String header();
 
+        /**
+         * Adds another sentence to the current group, starting with BUT.
+         *
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public But but(String sentence) {
+            final But but = new But(sentence);
+            setChild(but);
+            return but;
+        }
     }
 
     //----------------------------------------------------------------------------------------------
+
+    public static class But extends And {
+
+        private But(String rule) {
+            super(rule);
+        }
+
+        @Override
+        protected String header() {
+            return " BUT";
+        }
+    }
+
+    public static class And extends AbstractRules {
+
+        private And(String rule) {
+            super(rule);
+        }
+
+        /**
+         * Starts describing the action executed in the use case.
+         *
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public When when(String sentence) {
+            When when = new When(sentence);
+            setChild(when);
+            return when;
+        }
+
+        /**
+         * Starts describing in plain text the expected behavior after executing the use case.
+         *
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public Then then(String sentence) {
+            Then then = new Then(sentence);
+            setChild(then);
+            return then;
+        }
+
+        @Override
+        protected String header() {
+            return " AND";
+        }
+
+    }
+
 
     /**
      * Group of sentences describing the entry point of the use case, using plain text.
@@ -134,6 +197,7 @@ class FrutillaParser {
 
         /**
          * Starts describing the action executed in the use case.
+         *
          * @param sentence the sentence in plain text
          * @return the current group of sentences
          */
@@ -141,11 +205,6 @@ class FrutillaParser {
             When when = new When(sentence);
             setChild(when);
             return when;
-        }
-
-        @Override
-        public Given and(String sentence) {
-            return (Given) super.and(sentence);
         }
 
         @Override
@@ -168,16 +227,12 @@ class FrutillaParser {
 
         /**
          * Starts describing in plain text the expected behavior after executing the use case.
+         *
          * @param sentence the sentence in plain text
          * @return the current group of sentences
          */
         public Then then(String sentence) {
             return setChild(new Then(sentence));
-        }
-
-        @Override
-        public When and(String sentence) {
-            return (When) super.and(sentence);
         }
 
         @Override
@@ -196,11 +251,6 @@ class FrutillaParser {
 
         private Then(String rule) {
             super(rule);
-        }
-
-        @Override
-        public Then and(String sentence) {
-            return (Then) super.and(sentence);
         }
 
         @Override
