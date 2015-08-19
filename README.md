@@ -99,6 +99,14 @@ and add the instrumentation in your manifest
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:targetPackage="org.frutilla"/>
     
+# Installation
+
+Use the group id for maven and gradle, an example of how to add it in an android project
+
+```
+    androidTestCompile 'com.github.ignaciotcrespo:frutilla:0.5.0'
+```
+
 ***
 
 Frutilla is still in development, but functional. I appreciate your feedback to itcrespo@gmail.com
