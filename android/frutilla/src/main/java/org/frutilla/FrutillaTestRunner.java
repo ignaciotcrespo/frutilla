@@ -6,6 +6,8 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
+import static org.frutilla.FrutillaParser.given;
+
 /**
  * Process Frutilla annotations in top of tests.
  */
@@ -54,7 +56,7 @@ public class FrutillaTestRunner extends BlockJUnit4ClassRunner {
             log("--------------------------------------------");
             String text = "";
             try {
-                text = FrutillaAnnotationHelper.getText(mMethod.getAnnotation(Frutilla.class));
+                text = given(mMethod.getAnnotation(Frutilla.class));
             } catch (Throwable exc) {
                 // do nothing
             }

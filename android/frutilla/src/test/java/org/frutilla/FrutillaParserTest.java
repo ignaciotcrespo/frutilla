@@ -5,6 +5,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.frutilla.FrutillaParser.given;
 import static org.frutilla.FrutillaParser.has;
@@ -12,6 +14,7 @@ import static org.frutilla.FrutillaParser.reset;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 @RunWith(value = FrutillaTestRunner.class)
 public class FrutillaParserTest {
@@ -59,6 +62,16 @@ public class FrutillaParserTest {
     @Test
     public void testGivenMultiple() throws Exception {
         given(GIVEN).and(ONE).and(TWO);
+
+        assertTrue(has(ONE));
+        assertTrue(has(TWO));
+    }
+
+    @Test
+    public void testGivenMultipleMultiline() throws Exception {
+        FrutillaParser.Given given = given(GIVEN);
+        given.and(ONE);
+        given.and(TWO);
 
         assertTrue(has(ONE));
         assertTrue(has(TWO));
@@ -112,7 +125,7 @@ public class FrutillaParserTest {
     public void testPopSentence() throws Exception {
         given(GIVEN).and(ONE).but("pero").when(WHEN).and(TWO).then(THEN).and(THREE);
 
-        final String sentence = String.format("GIVEN %s\n AND %s\n BUT %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s\n", GIVEN, ONE, "pero", WHEN, TWO, THEN, THREE);
+        final String sentence = String.format("GIVEN %s\n AND %s\n BUT %s\nWHEN %s\n AND %s\nTHEN %s\n AND %s", GIVEN, ONE, "pero", WHEN, TWO, THEN, THREE);
         assertEquals(sentence, FrutillaParser.popSentence());
         assertTrue(FrutillaParser.isEmpty());
     }

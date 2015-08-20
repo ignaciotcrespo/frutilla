@@ -2,10 +2,12 @@ package org.frutilla;
 
 import org.frutilla.annotations.Frutilla;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.frutilla.ExceptionUtils.insertMessage;
 import static org.junit.Assert.assertTrue;
 
+@RunWith(value = FrutillaTestRunner.class)
 public class ExceptionUtilsTest {
 
     public static final String MESSAGE = "original message";
