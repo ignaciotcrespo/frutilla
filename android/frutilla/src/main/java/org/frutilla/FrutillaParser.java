@@ -13,49 +13,71 @@ class FrutillaParser {
 
     private static final String AND = " AND";
     private static final String BUT = " BUT";
-    private static Given sGiven;
+    private static AbstractSentence sRoot;
 
+    /**
+     * Describes the scenario of the use case.
+     *
+     * @param text the sentence describing the scenario
+     * @return a Scenario object to conitnue adding sentences
+     */
+    static Scenario scenario(String text) {
+        reset();
+        final Scenario scenario = new Scenario(text);
+        sRoot = scenario;
+        return scenario;
+    }
+
+    /**
+     * Describes the entry point of the use case.
+     *
+     * @param text the sentence describing the entry point
+     * @return a Given object to continue adding sentences
+     */
     static Given given(String text) {
         reset();
-        sGiven = new Given(text);
-        return sGiven;
+        final Given given = new Given(text);
+        sRoot = given;
+        return given;
     }
 
     static boolean has(String sentence) {
-        return sGiven != null && sGiven.has(sentence);
+        return sRoot != null && sRoot.has(sentence);
     }
 
     static void reset() {
-        if (sGiven != null) {
-            sGiven.reset();
-            sGiven = null;
+        if (sRoot != null) {
+            sRoot.reset();
+            sRoot = null;
         }
     }
 
     static boolean isEmpty() {
-        return sGiven == null || sGiven.isEmpty();
+        return sRoot == null || sRoot.isEmpty();
     }
 
     static String popSentence() {
-        if (sGiven != null) {
-            return sGiven.popSentence();
+        if (sRoot != null) {
+            return sRoot.popSentence();
         }
         return "";
     }
 
-    static String given(Frutilla annotation) {
+    static String scenario(Frutilla annotation) {
         String value = "";
         if (annotation != null) {
-            final Given given = new Given(annotation.Given());
-            given.when(annotation.When()).then(annotation.Then());
-            value = given.popSentence();
+            final Scenario scenario = new Scenario(annotation.Scenario());
+            scenario.given(annotation.Given())
+                    .when(annotation.When())
+                    .then(annotation.Then());
+            value = scenario.popSentence();
         }
         return value;
     }
 
     //----------------------------------------------------------------------------------------------
 
-    private static abstract class AbstractSentence {
+    static abstract class AbstractSentence {
 
         private String mSentence;
         private final List<AbstractSentence> mChildren = new LinkedList<>();
@@ -134,8 +156,10 @@ class FrutillaParser {
             }
             for (AbstractSentence child : mChildren) {
                 final String text = child.popSentence();
-                if (!text.isEmpty()) {
-                    sentence.append("\n");
+                if (!text.trim().isEmpty()) {
+                    if (sentence.length() > 0) {
+                        sentence.append("\n");
+                    }
                     sentence.append(text);
                 }
             }
@@ -158,6 +182,54 @@ class FrutillaParser {
     }
 
     //----------------------------------------------------------------------------------------------
+
+    /**
+     * Group of sentences describing the scenario of the use case, using plain text.
+     */
+    public static class Scenario extends AbstractSentence {
+
+        private Scenario(String sentence) {
+            super(sentence, "SCENARIO");
+        }
+
+        private Scenario(String[] sentences) {
+            super(sentences, "SCENARIO");
+        }
+
+        private Scenario(String sentence, String header) {
+            super(sentence, header);
+        }
+
+        /**
+         * Starts describing the action executed in the use case.
+         *
+         * @param sentence the sentence in plain text
+         * @return the current group of sentences
+         */
+        public Given given(String sentence) {
+            Given given = new Given(sentence);
+            addChild(given);
+            return given;
+        }
+
+        Given given(String[] sentences) {
+            Given given = new Given(sentences);
+            addChild(given);
+            return given;
+        }
+
+
+        @Override
+        public Scenario and(String sentence) {
+            return (Scenario) addChild(new Scenario(sentence, AND));
+        }
+
+        @Override
+        public Scenario but(String sentence) {
+            return (Scenario) addChild(new Scenario(sentence, BUT));
+        }
+
+    }
 
     /**
      * Group of sentences describing the entry point of the use case, using plain text.
