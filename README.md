@@ -1,4 +1,4 @@
-# Frutilla 0.6.0
+# Frutilla 0.7.0
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
 
 I like the **[Cucumber](https://cucumber.io/)** way to describe tests using **GIVEN + WHEN + THEN** sentences, and I think JUnit needs something to help UT to be more descriptive. Cucumber has a java API but I think it is very complex to use, linking sentences to java methods. Creating a UT should be a simple task.
@@ -104,7 +104,7 @@ and add the instrumentation in your manifest
 Use the group id for maven and gradle, an example of how to add it in an android project
 
 ```
-    androidTestCompile 'com.github.ignaciotcrespo:frutilla:0.6.0'
+    androidTestCompile 'com.github.ignaciotcrespo:frutilla:0.7.0'
 ```
 
 ***
