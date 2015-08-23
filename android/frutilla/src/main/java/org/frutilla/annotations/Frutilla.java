@@ -20,7 +20,11 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Frutilla {
 
-    String Scenario() default "";
+    /**
+     * Describes the scenario of the use case.
+     * @return the sentences for the scenario
+     */
+    String[] Scenario() default "";
 
     /**
      * Describes the entry point of the use case.
