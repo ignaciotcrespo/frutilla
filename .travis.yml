@@ -1,6 +1,6 @@
 ---
 language: java
-script: gradle -b android/frutilla/build.gradle test
+script: gradle -b java/build.gradle test
 jdk:
 - openjdk7
 
@@ -9,7 +9,7 @@ sudo: false
 
 branches:
   only:
-  - master
+  - travis
 notifications:
   email:
   - itcrespo@gmail.com
