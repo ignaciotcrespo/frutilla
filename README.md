@@ -1,6 +1,6 @@
 ![Frutilla Logo](https://raw.githubusercontent.com/ignaciotcrespo/frutilla/master/design/frutilla.jpg)
 
-![build status](https://img.shields.io/badge/build-info =>-yellow.svg) [![Build Status](https://travis-ci.org/ignaciotcrespo/frutilla.svg?branch=master)](https://travis-ci.org/ignaciotcrespo/frutilla) [![MIT License](http://img.shields.io/badge/license-MIT-green.svg) ](https://github.com/ignaciotcrespo/frutilla/blob/master/LICENSE)
+![build status](https://img.shields.io/badge/build-info =>-yellow.svg) [![Build Status](https://travis-ci.org/ignaciotcrespo/frutilla.svg?branch=master)](https://travis-ci.org/ignaciotcrespo/frutilla) [![codecov.io](http://codecov.io/github/ignaciotcrespo/frutilla/coverage.svg?branch=master)](http://codecov.io/github/ignaciotcrespo/frutilla?branch=master) [![MIT License](http://img.shields.io/badge/license-MIT-green.svg) ](https://github.com/ignaciotcrespo/frutilla/blob/master/LICENSE)
 
 
 # Frutilla 0.7.0
