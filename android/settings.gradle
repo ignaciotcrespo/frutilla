@@ -1,1 +1,1 @@
-include ':example-android-app', ':frutilla', ':frutilla-android'
+include ':example-android-app', ':frutilla-android'

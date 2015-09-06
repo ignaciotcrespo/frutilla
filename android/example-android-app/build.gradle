@@ -24,6 +24,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     testCompile 'junit:junit:4.12'
-    testCompile project(':frutilla')
+    testCompile 'com.github.ignaciotcrespo:frutilla:0.7.0'
     testCompile project(':frutilla-android')
 }

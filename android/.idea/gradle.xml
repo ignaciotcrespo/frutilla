@@ -11,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/example-android-app" />
-            <option value="$PROJECT_DIR$/frutilla" />
             <option value="$PROJECT_DIR$/frutilla-android" />
           </set>
         </option>
