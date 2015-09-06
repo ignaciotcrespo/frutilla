@@ -14,8 +14,5 @@ notifications:
   email:
   - itcrespo@gmail.com
 
-before_script:
-  - pip install --user codecov
-
 after_success:
-  - codecov
+  - bash <(curl -s https://codecov.io/bash)
