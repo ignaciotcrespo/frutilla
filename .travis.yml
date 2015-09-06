@@ -1,2 +1,15 @@
+---
 language: java
 script: gradle -b android/frutilla/build.gradle test
+jdk:
+- openjdk7
+
+# get us on the new container based builds, we're not using any fancyness
+sudo: false
+
+branches:
+  only:
+  - master
+notifications:
+  email:
+  - itcrespo@gmail.com
