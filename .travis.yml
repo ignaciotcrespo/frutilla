@@ -1,6 +1,6 @@
 ---
 language: java
-script: gradle -b java/build.gradle test
+script: gradle -b java/build.gradle check
 jdk:
 - openjdk7
 
