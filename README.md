@@ -1,4 +1,4 @@
-[Frutilla Logo](https://raw.githubusercontent.com/ignaciotcrespo/frutilla/master/design/frutilla.jpg)
+![Frutilla Logo](https://raw.githubusercontent.com/ignaciotcrespo/frutilla/master/design/frutilla.jpg)
 
 # Frutilla 0.7.0
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
