@@ -9,7 +9,7 @@ sudo: false
 
 branches:
   only:
-  - travis
+  - master
 notifications:
   email:
   - itcrespo@gmail.com
