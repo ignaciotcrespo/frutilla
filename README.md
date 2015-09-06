@@ -1,5 +1,8 @@
 ![Frutilla Logo](https://raw.githubusercontent.com/ignaciotcrespo/frutilla/master/design/frutilla.jpg)
 
+![build status](https://img.shields.io/badge/build-info =>-yellow.svg) [![Build Status](https://travis-ci.org/ignaciotcrespo/frutilla.svg?branch=master)](https://travis-ci.org/ignaciotcrespo/frutilla) [![MIT License](http://img.shields.io/badge/license-MIT-green.svg) ](https://github.com/ignaciotcrespo/frutilla/blob/master/LICENSE)
+
+
 # Frutilla 0.7.0
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
 
