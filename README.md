@@ -4,6 +4,9 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Frutilla-blue.svg?style=flat)](http://android-arsenal.com/details/1/2452)
 
+[![Github Issues](http://githubbadges.herokuapp.com/ignaciotcrespo/frutilla/issues.svg?style=flat-square)](https://github.com/ignaciotcrespo/frutilla/issues)
+[![Pending Pull-Requests](http://githubbadges.herokuapp.com/ignaciotcrespo/frutilla/pulls.svg?style=flat-square)](https://github.com/ignaciotcrespo/frutilla/pulls)
+
 # Frutilla 0.7.0
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
 
