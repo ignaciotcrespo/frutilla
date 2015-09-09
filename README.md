@@ -2,6 +2,7 @@
 
 ![build status](https://img.shields.io/badge/build-info =>-yellow.svg) [![Build Status](https://travis-ci.org/ignaciotcrespo/frutilla.svg?branch=master)](https://travis-ci.org/ignaciotcrespo/frutilla) [![codecov.io](http://codecov.io/github/ignaciotcrespo/frutilla/coverage.svg?branch=master)](http://codecov.io/github/ignaciotcrespo/frutilla?branch=master) [![MIT License](http://img.shields.io/badge/license-MIT-green.svg) ](https://github.com/ignaciotcrespo/frutilla/blob/master/LICENSE)
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Frutilla-blue.svg?style=flat)](http://android-arsenal.com/details/1/2452)
 
 # Frutilla 0.7.0
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
