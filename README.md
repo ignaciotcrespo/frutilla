@@ -113,7 +113,7 @@ and add the instrumentation in your manifest
 Use the group id for maven and gradle, an example of how to add it in an android project
 
 ```
-    androidTestCompile 'com.github.ignaciotcrespo:frutilla:0.7.0'
+    testCompile 'com.github.ignaciotcrespo:frutilla:0.7.0'
 ```
 
 ***
