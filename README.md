@@ -8,6 +8,9 @@
 [![Pending Pull-Requests](http://githubbadges.herokuapp.com/ignaciotcrespo/frutilla/pulls.svg?style=flat-square)](https://github.com/ignaciotcrespo/frutilla/pulls)
 
 # Frutilla 0.7.1
+
+`UPDATE: this started as an experiment in my projects and I received a lot of nice feedback about it, positive and negative. I love all the technical knowledge I exchanged with many of you. This project is deprecated now, after a long technical session I agree the best way to see useful information in the UT is to add detailed messages in the assertions. I will change Frutilla, analyzing how to generate a report extracting the javadocs directly from the source of the tests.`
+
 Frutilla lets java software development teams describe the tests in plain text, and link them to the specifications.
 
 I like the **[Cucumber](https://cucumber.io/)** way to describe tests using **GIVEN + WHEN + THEN** sentences, and I think JUnit needs something to help UT to be more descriptive. Cucumber has a java API but I think it is very complex to use, linking sentences to java methods. Creating a UT should be a simple task.
